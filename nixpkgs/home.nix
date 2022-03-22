@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  sources = import ../nix/sources.nix {};
+  sources = import ../nix/sources.nix { };
   unstable = import sources.nixpkgs { config = { allowUnfree = true; }; };
 in
 {
@@ -20,11 +20,11 @@ in
   home.stateVersion = "22.05";
 
   nixpkgs.config.allowUnfree = true;
-  
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+
   home.packages = [
     unstable.iterm2
     unstable.vscode
@@ -37,7 +37,7 @@ in
     enable = true;
     nix-direnv.enable = true;
   };
-  
+
   programs.fish = {
     enable = true;
     plugins = [
@@ -72,7 +72,7 @@ in
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       end
-      
+
       starship init fish | source
       eval (direnv hook fish)
       set -Ux EDITOR code
