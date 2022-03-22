@@ -16,4 +16,5 @@ repos:
     rev: v1.2.0
     hooks:
       - id: conventional-pre-commit
-        stages: [commit-msg]
+        stages:
+          - commit-msg
